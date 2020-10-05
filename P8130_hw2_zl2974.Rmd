@@ -40,14 +40,30 @@ specificity = \frac{\boldsymbol{P}(negative \mid not\ carcinoma)}{\boldsymbol{P}
 
 3. 
     a. $$\begin{aligned}
-    \boldsymbol{P}(prostatic\ cancer\mid Positive\cap Palpable\ Prostatic\ Nodule)\\=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\
-    ={P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)} \div \\(P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer) \times P(prostatic\ cancer)\\+ P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer^c) \times P(prostatic\ cancer^c))\\=\frac{80\% \times 50\%}{80\% \times 50\% +5\% \times 50\%}\\=`r .8*.5/(.8*.5+.05*.5)`
+    \boldsymbol{P}(prostatic\ cancer\mid Positive\cap Palpable\ Prostatic\ Nodule)\\=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\\end{aligned}$$
+    $$\begin{aligned}
+    =P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer) \div \\
+    \{P(Positive\mid Palpable\ Prostatic\ Nodule\cap prostatic\ cancer) \times \\
+    P(Palpable\ Prostatic\ Nodule\cap prostatic\ cancer)+\\
+    P(Positive\mid Palpable\ Prostatic\ Nodule\cap prostatic\ cancer^c) \times \\
+    P(Palpable\ Prostatic\ Nodule\cap prostatic\ cancer^c)\}
+    \end{aligned}$$
+    $$\begin{aligned}
+    =\frac{80\% \times 50\%}{80\% \times 50\% +5\% \times 50\%}\\=`r .8*.5/(.8*.5+.05*.5)`
     \end{aligned}$$
 \ This is the positive predictive value of a test.
 
     a. 
     $$\begin{aligned}
-    \boldsymbol{P}(prostatic\ cancer'\mid Positive\cap Palpable\ Prostatic\ Nodule)\\=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\={P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')} \div \\(P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer') \times P(prostatic\ cancer')\\+ P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer'^c) \times P(prostatic\ cancer'^c))\\=\frac{80\% \times 10\%}{80\% \times 10\% +5\% \times 90\%}\\=`r .8*.1/(.8*.1+.05*.9)`
+    \boldsymbol{P}(prostatic\ cancer'\mid Positive\cap Palpable\ Prostatic\ Nodule)\\=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\\end{aligned}$$
+    $$\begin{aligned}
+    =P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer') \div \\
+    \{P(Positive\mid Palpable\ Prostatic\ Nodule\cap prostatic\ cancer') \times \\
+    P(Palpable\ Prostatic\ Nodule\cap prostatic\ cancer)+\\
+    P(Positive\mid Palpable\ Prostatic\ Nodule\cap prostatic\ cance'r^c) \times \\
+    P(Palpable\ Prostatic\ Nodule\cap prostatic\ cancer'^c)\}
+    \end{aligned}$$
+    $$\begin{aligned}=\frac{80\% \times 10\%}{80\% \times 10\% +5\% \times 90\%}\\=`r .8*.1/(.8*.1+.05*.9)`
     \end{aligned}$$
 \ Noticing that lower disease prevalence/ prior produce a lower positive predictive value. This is similar to the example given on class regarding the low positive predictive value base on the low prevalence of COVID-19 in some communities.
 $\blacksquare$
@@ -105,8 +121,8 @@ $P(\mathcal{X}=50\times34.5\%\approx17)\ = {n \choose 17}p^{17}(1-p)^{n-17}\ = `
 ```{r approximation,echo=F,message=FALSE}
 library(tidyverse)
 tibble(
-    normal = rnorm(500,17.25,sqrt(50*.345*(1-.345))),
-    binomial = rbinom(500,50,.345)
+    normal = rnorm(1000,17.25,sqrt(50*.345*(1-.345))),
+    binomial = rbinom(1000,50,.345)
   ) %>% 
   pivot_longer(
     normal:binomial,
@@ -119,8 +135,10 @@ tibble(
   viridis::scale_fill_viridis(name = "Distribution",
                               discrete = T)+
   labs(
-    title = "Distribution of 500 samples from Simulation"
-  )
+    title = "Distribution of 1000 samples from Simulation",
+    x = ""
+  )+
+  theme(legend.position = "bottom")
 ```
     
 $\blacksquare$
@@ -211,12 +229,13 @@ plt_df = tibble(
 ggplot(data = plt_df,
        aes(x=value,y=y)
        )+
+  theme_minimal()+
   geom_line()+
   geom_area(data = filter(plt_df,cutoff == "mid-50%",
                           between(value,
                                   qnorm(.25,99,.73/sqrt(40)),
                                   qnorm(.75,99,.73/sqrt(40)))), 
-            aes(x = value, y = y,fill = cutoff)
+            aes(x = value, y = y,fill = cutoff), alpha = .5
             )+
   scale_x_continuous(
     breaks = c(qnorm(.25,99,.73/sqrt(40)),qnorm(.75,99,.73/sqrt(40))),
