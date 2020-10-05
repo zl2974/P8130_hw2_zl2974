@@ -15,45 +15,44 @@ knitr::opts_chunk$set(echo = TRUE)
 A new test is being developed for the detection of carcinoma of the prostate (Foti et al. N Engl. JMed. 1977). When it is tested in a group of 113 patients with prostatic cancer, 79 have a positive diagnosis; in a group of 217 individuals without prostatic cancer, 10 have a positive diagnosis.
 
 1) Calculate the specificity and sensitivity of the test. (4p)
-
-$sensitivity = \frac{\boldsymbol{P}(positive \mid carcinoma)}{\boldsymbol{P}(carcinoma)}\\=\frac{79/113}{79/113+10/217}\\=$
-`r (79/113)/(79/113+10/217)`
-
-
-$specificity = \frac{\boldsymbol{P}(negative \mid not\ carcinoma)}{\boldsymbol{P}(not\ carcinoma)}\\=\frac{`r 217-10`/217}{`r 113-79`/113+207/217}\\= `r (207/217)/((113-79)/113+207/217)`$
-
-
 2) In another hypothetical scenario, it is planned to use the test to screen a large sample of
 subjects for prostatic cancer where the test results will be the only data available. Is this
 information enough to assess the test characteristics, i.e., sensitivity & specificity? Yes, no, what is missing (if the case)? (2p)
-
-NO, the sensitivity and specificity are computed base in comparision to the test result of gold standard test's result. And thus, given the data of this test only is not sufficient to calculate sensitivity and specificity of this test.
-
 3) In patients with palpable prostatic nodules, the pretest likelihood of prostatic cancer is 50%. The test under these conditions has a sensitivity of 80% and a specificity of 95%.
 a) Calculate the probability of a patient with a palpable prostatic nodule and a positive
 test result having prostatic cancer. What is the epidemiological term of this probability?
 (3.5p)
-$$
-\boldsymbol{P}(prostatic\ cancer\mid Positive\cap Palpable\ Prostatic\ Nodule)\\$$
-$$=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\$$
-$={P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)} \div \\(P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer) \times P(prostatic\ cancer)\\+ P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer^c) \times P(prostatic\ cancer^c))\\$
-$$=\frac{80\% \times 50\%}{80\% \times 50\% +5\% \times 50\%}\\=`r .8*.5/(.8*.5+.05*.5)`
-$$
-\ This is the ????
-
 b) Re-calculate the probability in 2-a), using a pretest likelihood of prostatic cancer of
 10%. Compare the two values and comment on their differences. (3.5p)
+1. 
+$$\begin{aligned}
+sensitivity = \frac{\boldsymbol{P}(positive \mid carcinoma)}{\boldsymbol{P}(carcinoma)}\\
+=\frac{79/113}{79/113+10/217}\\=
+`r (79/113)/(79/113+10/217)`
+\end{aligned}$$
 
-$$
-\boldsymbol{P}(prostatic\ cancer'\mid Positive\cap Palpable\ Prostatic\ Nodule)\\$$
-$$=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\$$
-$={P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')} \div \\(P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer') \times P(prostatic\ cancer')\\+ P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer'^c) \times P(prostatic\ cancer'^c))\\$
-$$=\frac{80\% \times 10\%}{80\% \times 10\% +5\% \times 90\%}\\=`r .8*.1/(.8*.1+.05*.9)`
-$$
+
+$$\begin{aligned}
+specificity = \frac{\boldsymbol{P}(negative \mid not\ carcinoma)}{\boldsymbol{P}(not\ carcinoma)}\\=\frac{`r 217-10`/217}{`r 113-79`/113+207/217}\\= `r (207/217)/((113-79)/113+207/217)`
+\end{aligned}$$
+
+2. NO, the sensitivity and specificity are computed base on comparision to the test result of gold standard. And thus, given the data of this test only are not sufficient to calculate sensitivity and specificity of this test.
+
+3. 
+    a. $$\begin{aligned}
+    \boldsymbol{P}(prostatic\ cancer\mid Positive\cap Palpable\ Prostatic\ Nodule)\\=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\
+    ={P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer)} \div \\(P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer) \times P(prostatic\ cancer)\\+ P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer^c) \times P(prostatic\ cancer^c))\\=\frac{80\% \times 50\%}{80\% \times 50\% +5\% \times 50\%}\\=`r .8*.5/(.8*.5+.05*.5)`
+    \end{aligned}$$
+\ This is the positive predictive value of a test.
+
+    a. 
+    $$\begin{aligned}
+    \boldsymbol{P}(prostatic\ cancer'\mid Positive\cap Palpable\ Prostatic\ Nodule)\\=\frac{P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')}{P(Positive\cap Palpable\ Prostatic\ Nodule)}\\={P(Positive\cap Palpable\ Prostatic\ Nodule\ \cap prostatic\ cancer')} \div \\(P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer') \times P(prostatic\ cancer')\\+ P(Positive\cap Palpable\ Prostatic\ Nodule\mid prostatic\ cancer'^c) \times P(prostatic\ cancer'^c))\\=\frac{80\% \times 10\%}{80\% \times 10\% +5\% \times 90\%}\\=`r .8*.1/(.8*.1+.05*.9)`
+    \end{aligned}$$
 \ Noticing that lower disease prevalence/ prior produce a lower positive predictive value. This is similar to the example given on class regarding the low positive predictive value base on the low prevalence of COVID-19 in some communities.
 $\blacksquare$
 
-\newpage
+
 # Problem 2
 
 According to the Center for Disease Control (CDC), about 34.5% of the adult US population are
@@ -69,6 +68,7 @@ Calculate the following exact probabilities based on the national statistics:
 4) Could you use an approximation method to calculate the probabilities above? If yes,
 calculate the probabilities using approximations and compare to the exact values; otherwise,
 explain why approximations methods are not appropriate. (2.5p)<br/>
+
 **Proof**
 
 1. With the information given, any sample from the population has probability of $p=34.5%$ suffer from prediabetic. Define $\mathcal{X}$ as the random variable(R.V.) , then the probability of number of samples from population suffer from prediabetic follows the distribution of Binomial of $Bin~(50,.345)$.<br/>
@@ -88,30 +88,142 @@ $$
 3. The probability 34.5% proportion of the patients are prediabetic is:
 $P(\mathcal{X}=50\times34.5\%\approx17)\ = {n \choose 17}p^{17}(1-p)^{n-17}\ = `r pbinom(17,50,.345)- pbinom(16,50,.345)`$
 
-1. the sample size exceed 30, it can be approximate by Normal distribution of $N\sim(np,np(1-p))$ by CLT
+1. the sample size exceed 30, it can be approximate by Normal distribution of $X \sim N(np,np(1-p))$ by CLT
 
     1. 
-    $P(\mathcal{X}=0)\ \approx \phi(0-1/2 <\mathcal{X}<0+1/2)\\
+    $P(\mathcal{X}=0)\ \approx P_N(0-1/2 <\mathcal{X}<0+1/2)\\
     = `r pnorm(0.5,17.25,sqrt(50*.345*(1-.345)))-pnorm(-0.5,17.25,sqrt(50*.345*(1-.345)))`$
     
     1. 
-    $P(\mathcal{X}<10)\ \approx \phi(\mathcal{X}<9+1/2)\\
+    $P(\mathcal{X}<10)\ \approx P_N(\mathcal{X}<9+1/2)\\
     = `r pnorm(9.5,17.25,sqrt(50*.345*(1-.345)))`$
     
     1. 
-    $P(\mathcal{X}=17)\ \approx \phi(17-1/2 <\mathcal{X}<17+1/2)\\
+    $P(\mathcal{X}=17)\ \approx P_N(17-1/2 <\mathcal{X}<17+1/2)\\
     = `r pnorm(17.5,17.25,sqrt(50*.345*(1-.345)))-pnorm(16.5,17.25,sqrt(50*.345*(1-.345)))`$
-1.
+    
+```{r approximation,echo=F,message=FALSE}
+library(tidyverse)
+tibble(
+    normal = rnorm(500,17.25,sqrt(50*.345*(1-.345))),
+    binomial = rbinom(500,50,.345)
+  ) %>% 
+  pivot_longer(
+    normal:binomial,
+    names_to = 'dis',
+    values_to = "sample"
+  ) %>% 
+  ggplot(aes(x=sample,fill = dis))+
+  geom_density(alpha = 0.5)+
+  theme_minimal()+
+  viridis::scale_fill_viridis(name = "Distribution",
+                              discrete = T)+
+  labs(
+    title = "Distribution of 500 samples from Simulation"
+  )
+```
+    
 $\blacksquare$
 
-\newpage
+
 # Problem 3
 \ The incidence of uveal melanoma in the US is approximately 5 per million individuals per year,
 with a significantly higher incidence in non-Hispanic Whites (6.02 per million), when compared
-to Blacks and Asians: 0.31 and 0.39 per million, respectively.
+to Blacks and Asians: 0.31 and 0.39 per million, respectively.<br/>
+
 a) What is the probability that in NYC (population of 8.3 million reported in 2020), exactly 30
-cases occur in a given year? (4p)
+cases occur in a given year? (4p)<br/>
+
 b) Compute the same probability in a) by the mentioned racial/ethnic groups and comment on
 the findings. Demographic data of NYC in 2020: 14.0% Asians, 42.8% non-Hispanic Whites,
-24.3% Black. (6p)
-    
+24.3% Black. (6p)<br/>
+
+**Proof**
+
+1. There isn't evidence that the total incidence of uveal melanoma in NYC is different from the US.<br/>
+And given this is the number of rare disease in large population, a Poisson distribution can be used to approximate the distribution of population.<br/>
+with the information in the text, $\lambda = 5\times8.3=`r 5*8.3`$, so the number of cases (defined as the R.V. of $\mathcal{X}$ )is follow $\mathcal{X} \sim Poi(`r 5*8.3`)$.
+$$
+\begin{aligned}
+P_X(x=30)= e^{-\lambda}\lambda^k/k!=`r ppois(30,5*8.3)`
+\end{aligned}
+$$
+
+1. There're `r .14*8.3` million asians, `r .428*8.3` million non-Hispanic white, `r .243*8.3` million black and `r (1-(.14+.428+.243))*8.3` million other unspecified ethnic/racial groups. The $\lambda$ for these subpopulation within their group are `r .14*8.3*.31`, `r .428*8.3*6.02`, `r .243*8.3*.39` and `r (1-.811)*8.3*5` respectively. The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint distribution of poisson distribution.
+$$
+\begin{aligned}
+P_X(x=30)= e^{-\lambda'}\lambda'^k/k!=`r ppois(30, .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5)`\\
+\blacksquare
+\end{aligned}
+$$
+
+# Problem 4
+People with COVID-19 have had a wide range of symptoms, but high temperature is one of the
+most important indications. Based on current data, the average temperature of patients
+diagnosed with COVID-19 follow a normal distribution with a mean of 99.9 degrees Fahrenheit
+and a standard deviation of 0.73 degrees Fahrenheit. Of course, this differs from person to
+person, based on factors like body weight, height, the weather, age or gender.
+Let $X_1 \ldots X_{40}$ be the body temperatures of 40 randomly chosen individuals returning to the Columbia University Medical Center. Calculate the following probabilities:
+
+1) 𝑃($\bar{X}$ < 98), the probability that the sample mean is less than 98 (average normal
+temperature). (2.5p)
+
+2) 𝑃($\bar{X}$ > 100.5), the probability that the sample mean is greater than 100.5 (alarming zone for COVID-19). (2.5p)
+
+3) The 90th quantile of the sampling distribution of the sample mean $\bar{X}$. (2.5p)
+
+4) The cutoff values for the middle 50% of the sampling distribution of the sample mean $\bar{X}$(2.5p)
+
+**Proof**
+
+1. We know the sample mean and its standard deviation of the population. Thus the sample distribution of these 40 patients given the null hypothesis following a $\mathcal{N}(99.9,\frac{0.73^2}{40})$ distribution.
+$$
+\begin{aligned}
+P_{\bar{X}}(\bar{x}<98) = \phi(k < \frac{98-99.99}{.73/\sqrt{40}}) \\
+= `r pnorm(98,99.99,.73/sqrt(40))`
+\end{aligned}
+$$
+
+2. 
+$$
+\begin{aligned}
+P_{\bar{X}}(\bar{x}>100.5) = 1 - \phi(k < \frac{100.5-99.99}{.73/\sqrt{40}}) \\
+= `r 1- pnorm(100.5,99.99,.73/sqrt(40))`
+\end{aligned}
+$$
+
+1. `r qnorm(.9,99.99,.73/sqrt(40))`
+
+1. left cutoff is $25^{th}$ percentile of the sampling distribution, which is `r qnorm(.25,99,.73/sqrt(40))`. And the right is the $75^{th}$ `r qnorm(.75,99,.73/sqrt(40))`.<br/>
+
+
+```{r cutoff, echo = F, message=F}
+plt_df = tibble(
+  value = rnorm(10000,99,.73/sqrt(40))
+) %>% 
+  mutate(cutoff = case_when(
+    value < qnorm(.25,99,.73/sqrt(40)) ~ "outside mid-50%",
+    value > qnorm(.75,99,.73/sqrt(40)) ~ "outside mid-50%",
+    value != "outside mid-50%" ~ "mid-50%"
+  ),
+  y = dnorm(value,99,.73/sqrt(40))
+  )
+ggplot(data = plt_df,
+       aes(x=value,y=y)
+       )+
+  geom_line()+
+  geom_area(data = filter(plt_df,cutoff == "mid-50%",
+                          between(value,
+                                  qnorm(.25,99,.73/sqrt(40)),
+                                  qnorm(.75,99,.73/sqrt(40)))), 
+            aes(x = value, y = y,fill = cutoff)
+            )+
+  scale_x_continuous(
+    breaks = c(qnorm(.25,99,.73/sqrt(40)),qnorm(.75,99,.73/sqrt(40))),
+  )+
+  labs(x = "", y = "")+
+  viridis::scale_fill_viridis(discrete = T)+
+  theme(legend.position = "bottom")
+```
+
+$\blacksquare$
