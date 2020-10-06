@@ -170,7 +170,21 @@ P_X(x=30)= e^{-\lambda}\lambda^k/k!=`r dpois(30,5*8.3)`
 \end{aligned}
 $$
 
-1. There're `r .14*8.3` million asians, `r .428*8.3` million non-Hispanic white, `r .243*8.3` million black and `r (1-(.14+.428+.243))*8.3` million other unspecified ethnic/racial groups. The $\lambda$ for these subpopulation within their group are `r .14*8.3*.31`, `r .428*8.3*6.02`, `r .243*8.3*.39` and `r (1-.811)*8.3*5` respectively. The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint independent distribution of poisson random variables.
+1. There're `r .14*8.3` million asians, `r .428*8.3` million non-Hispanic white, `r .243*8.3` million black and `r (1-(.14+.428+.243))*8.3` million other unspecified ethnic/racial groups. The $\lambda$ for these subpopulation within their group are `r .14*8.3*.31`, `r .428*8.3*6.02`, `r .243*8.3*.39` and `r (1-.811)*8.3*5` respectively.
+
+$$\begin{aligned}
+P_{X\ asian}( x= 30) = \frac{e^{-`r .14*8.3*.31`}\times`r .14*8.3*.31`^{30}}{30!}=`r dpois(30,.14*8.3*.31)`
+\end{aligned}$$
+
+$$\begin{aligned}
+P_{X\ non\ hispanic\ white}( x= 30) = \frac{e^{-`r .428*8.3*6.02`}\times`r .428*8.3*6.02`^{30}}{30!}=`r dpois(30,.428*8.3*6.02)`
+\end{aligned}$$
+
+$$\begin{aligned}
+P_{X\ black}( x= 30) = \frac{e^{-`r .243*8.3*.39`}\times`r .243*8.3*.39`^{30}}{30!}=`r dpois(30,.243*8.3*.39)`
+\end{aligned}$$
+
+The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint independent distribution of poisson random variables.
 The pdf of the Poisson distribution is
 
 $$p(k) = \frac{\lambda ^k}{k!} \exp(-\lambda)$$
