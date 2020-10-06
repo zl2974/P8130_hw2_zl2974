@@ -197,34 +197,34 @@ temperature). (2.5p)
 1. We know the sample mean and its standard deviation of the population. Thus the sample distribution of these 40 patients given the null hypothesis following a $\mathcal{N}(99.9,\frac{0.73}{\sqrt{40}})$ distribution.
 $$
 \begin{aligned}
-P_{\bar{X}}(\bar{x}<98) = \phi(k < \frac{98-99.99}{.73/\sqrt{40}}) \\
-= `r pnorm(98,99.99,.73/sqrt(40))`
+P_{\bar{X}}(\bar{x}<98) = \phi(k < \frac{98-99.9}{.73/\sqrt{40}}) \\
+= `r pnorm(98,99.9,.73/sqrt(40))`
 \end{aligned}
 $$
 
 2. 
 $$
 \begin{aligned}
-P_{\bar{X}}(\bar{x}>100.5) = 1 - \phi(k < \frac{100.5-99.99}{.73/\sqrt{40}}) \\
-= `r 1- pnorm(100.5,99.99,.73/sqrt(40))`
+P_{\bar{X}}(\bar{x}>100.5) = 1 - \phi(k < \frac{100.5-99.9}{.73/\sqrt{40}}) \\
+= `r 1- pnorm(100.5,99.9,.73/sqrt(40))`
 \end{aligned}
 $$
 
-1. `r qnorm(.9,99.99,.73/sqrt(40))`
+1. `r qnorm(.9,99.9,.73/sqrt(40))`
 
-1. left cutoff is $25^{th}$ percentile of the sampling distribution, which is `r qnorm(.25,99,.73/sqrt(40))`. And the right is the $75^{th}$ `r qnorm(.75,99,.73/sqrt(40))`.<br/>
+1. left cutoff is $25^{th}$ percentile of the sampling distribution, which is `r qnorm(.25,99.9,.73/sqrt(40))`. And the right is the $75^{th}$ `r qnorm(.75,99.9,.73/sqrt(40))`.<br/>
 
 
 ```{r cutoff, echo = F, message=F}
 plt_df = tibble(
-  value = rnorm(10000,99,.73/sqrt(40))
+  value = rnorm(10000,99.9,.73/sqrt(40))
 ) %>% 
   mutate(cutoff = case_when(
-    value < qnorm(.25,99,.73/sqrt(40)) ~ "outside mid-50%",
-    value > qnorm(.75,99,.73/sqrt(40)) ~ "outside mid-50%",
+    value < qnorm(.25,99.9,.73/sqrt(40)) ~ "outside mid-50%",
+    value > qnorm(.75,99.9,.73/sqrt(40)) ~ "outside mid-50%",
     value != "outside mid-50%" ~ "mid-50%"
   ),
-  y = dnorm(value,99,.73/sqrt(40))
+  y = dnorm(value,99.9,.73/sqrt(40))
   )
 ggplot(data = plt_df,
        aes(x=value,y=y)
@@ -233,12 +233,12 @@ ggplot(data = plt_df,
   geom_line()+
   geom_area(data = filter(plt_df,cutoff == "mid-50%",
                           between(value,
-                                  qnorm(.25,99,.73/sqrt(40)),
-                                  qnorm(.75,99,.73/sqrt(40)))), 
+                                  qnorm(.25,99.9,.73/sqrt(40)),
+                                  qnorm(.75,99.9,.73/sqrt(40)))), 
             aes(x = value, y = y,fill = cutoff), alpha = .5
             )+
   scale_x_continuous(
-    breaks = c(qnorm(.25,99,.73/sqrt(40)),qnorm(.75,99,.73/sqrt(40))),
+    breaks = c(qnorm(.25,99.9,.73/sqrt(40)),qnorm(.75,99.9,.73/sqrt(40))),
   )+
   labs(x = "", y = "")+
   viridis::scale_fill_viridis(discrete = T)+
