@@ -142,7 +142,8 @@ tibble(
   )+
   theme(legend.position = "bottom")
 ```
-    
+
+We observed a heavier tail on both side of normal distribution compared with binomial. And thus the probability approximation from normal distribution of the first two results are higher than the actual probabilities from binomial.
 $\blacksquare$
 
 
