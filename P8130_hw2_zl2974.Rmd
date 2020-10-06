@@ -26,14 +26,16 @@ b) Re-calculate the probability in 2-a), using a pretest likelihood of prostatic
 10%. Compare the two values and comment on their differences. (3.5p)
 1. 
 $$\begin{aligned}
-sensitivity = \frac{\boldsymbol{P}(positive \mid carcinoma)}{\boldsymbol{P}(carcinoma)}\\
-=\frac{79/113}{79/113+10/217}\\=
-`r (79/113)/(79/113+10/217)`
+sensitivity =\frac{true\ positive}{true\ positive+\ false\ negative}\\
+=\frac{79}{113}\\
+=`r 79/113`
 \end{aligned}$$
 
 
 $$\begin{aligned}
-specificity = \frac{\boldsymbol{P}(negative \mid not\ carcinoma)}{\boldsymbol{P}(not\ carcinoma)}\\=\frac{`r 217-10`/217}{`r 113-79`/113+207/217}\\= `r (207/217)/((113-79)/113+207/217)`
+specificity =\frac{true\ negative}{true\ nagative+\ false\ positive}\\
+=\frac{79}{113}\\
+=`r 10/217`
 \end{aligned}$$
 
 2. NO, the sensitivity and specificity are computed base on comparision to the test result of gold standard. And thus, given the data of this test only are not sufficient to calculate sensitivity and specificity of this test.
@@ -167,7 +169,33 @@ P_X(x=30)= e^{-\lambda}\lambda^k/k!=`r ppois(30,5*8.3)`
 \end{aligned}
 $$
 
-1. There're `r .14*8.3` million asians, `r .428*8.3` million non-Hispanic white, `r .243*8.3` million black and `r (1-(.14+.428+.243))*8.3` million other unspecified ethnic/racial groups. The $\lambda$ for these subpopulation within their group are `r .14*8.3*.31`, `r .428*8.3*6.02`, `r .243*8.3*.39` and `r (1-.811)*8.3*5` respectively. The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint distribution of poisson distribution.
+1. There're `r .14*8.3` million asians, `r .428*8.3` million non-Hispanic white, `r .243*8.3` million black and `r (1-(.14+.428+.243))*8.3` million other unspecified ethnic/racial groups. The $\lambda$ for these subpopulation within their group are `r .14*8.3*.31`, `r .428*8.3*6.02`, `r .243*8.3*.39` and `r (1-.811)*8.3*5` respectively. The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint independent distribution of poisson random variables.
+The pdf of the Poisson distribution is
+
+$$p(k) = \frac{\lambda ^k}{k!} \exp(-\lambda)$$
+
+The joint pdf is the product of the pdfs of all independent variables $z = \sum x_i$. Which is given by
+
+$$P_Z(z)= \sum P_Z(x_1+x_2) =\sum{P_{X_1}(x_1)\times P_{X_2}(z-x_1)}$$
+
+which can be siplified to
+
+$$\begin{aligned}
+\sum{P_{X_1}(x_1)\times P_{X_2}(z-x_1)}= \sum{\frac{\lambda_1^{x_1}\exp(-\lambda_1)}{x_1 !} \times \frac{\lambda_2^{z-x_1}\exp(-\lambda_2)}{z-x_1 !}}\\
+=\sum{\frac{z !}{(z-x_1)!x_1!}\times\frac{e^{-(\lambda_1+\lambda_2)}}{z !}\times\lambda_1^{x_1}\times\lambda_2^{z-x_1}}
+\end{aligned}$$
+
+by binomial theorem, this is equal to:
+
+$$\begin{aligned}
+P_Z(z) = \frac{e^{-(\lambda_1+\lambda_2)}(\lambda_1+\lambda_2)^z}{z !}\\
+let\ \lambda = \lambda_1+\lambda_2\\
+P_Z(z) =Poi(\lambda)
+\end{aligned}
+$$
+
+So, we have 
+
 $$
 \begin{aligned}
 P_X(x=30)= e^{-\lambda'}\lambda'^k/k!=`r ppois(30, .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5)`\\
@@ -210,7 +238,12 @@ P_{\bar{X}}(\bar{x}>100.5) = 1 - \phi(k < \frac{100.5-99.9}{.73/\sqrt{40}}) \\
 \end{aligned}
 $$
 
-1. `r qnorm(.9,99.9,.73/sqrt(40))`
+1. $$\begin{aligned}
+p_{0.75} = \Phi(Z\le \frac{k-99.9}{.73/\sqrt{40}})=0.75\\  
+\Rightarrow\ Z \le `r qnorm(.9,0,1)`\\
+\Rightarrow\ k = \frac{`r qnorm(.9,0,1)`\times.73}{\sqrt{40}} + 99.9\\
+= `r qnorm(.9,99.9,.73/sqrt(40))`
+\end{aligned}$$
 
 1. left cutoff is $25^{th}$ percentile of the sampling distribution, which is `r qnorm(.25,99.9,.73/sqrt(40))`. And the right is the $75^{th}$ `r qnorm(.75,99.9,.73/sqrt(40))`.<br/>
 
