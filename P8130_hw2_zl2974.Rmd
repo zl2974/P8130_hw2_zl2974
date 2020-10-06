@@ -96,7 +96,7 @@ P(\mathcal{X}=k)\ = {n \choose k}p^k(1-p)^{n-k}
 $$
 \ And the probability of none of these patients have prediabetics is:
 $$
-P(\mathcal{X}=0)\ = {n \choose 0}p^0(1-p)^{n-0}\ = `r pbinom(0,50,.345)`
+P(\mathcal{X}=0)\ = {n \choose 0}p^0(1-p)^{n-0}\ = `r dbinom(0,50,.345)`
 $$
 <br/>
 2. Use the CDF of binomial distribution:
@@ -165,7 +165,7 @@ And given this is the number of rare disease in large population, a Poisson dist
 with the information in the text, $\lambda = 5\times8.3=`r 5*8.3`$, so the number of cases (defined as the R.V. of $\mathcal{X}$ )is follow $\mathcal{X} \sim Poi(`r 5*8.3`)$.
 $$
 \begin{aligned}
-P_X(x=30)= e^{-\lambda}\lambda^k/k!=`r ppois(30,5*8.3)`
+P_X(x=30)= e^{-\lambda}\lambda^k/k!=`r dpois(30,5*8.3)`
 \end{aligned}
 $$
 
@@ -190,15 +190,14 @@ by binomial theorem, this is equal to:
 $$\begin{aligned}
 P_Z(z) = \frac{e^{-(\lambda_1+\lambda_2)}(\lambda_1+\lambda_2)^z}{z !}\\
 let\ \lambda = \lambda_1+\lambda_2\\
-P_Z(z) =Poi(\lambda)
-\end{aligned}
-$$
+Z\sim Poi(\lambda)
+\end{aligned}$$
 
 So, we have 
 
 $$
 \begin{aligned}
-P_X(x=30)= e^{-\lambda'}\lambda'^k/k!=`r ppois(30, .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5)`\\
+P_X(x=30)= e^{-\lambda'}\lambda'^k/k!=`r dpois(30, .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5)`\\
 \blacksquare
 \end{aligned}
 $$
