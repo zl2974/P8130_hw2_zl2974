@@ -110,8 +110,8 @@ $P(\mathcal{X}=50\times34.5\%\approx18)\ = {n \choose 18}p^{18}(1-p)^{n-18}\ = `
 1. the sample size exceed 30, it can be approximate by Normal distribution of $X \sim N(np,np(1-p))$ by CLT
 
     1. 
-    $P(\mathcal{X}=0)\ \approx P_N(0-1/2 <\mathcal{X}<0+1/2)\\
-    = `r pnorm(0.5,17.25,sqrt(50*.345*(1-.345)))-pnorm(-0.5,17.25,sqrt(50*.345*(1-.345)))`$
+    $P(\mathcal{X}=0)\ \approx P_N(\mathcal{X}<0+1/2)\\
+    = `r pnorm(0.5,17.25,sqrt(50*.345*(1-.345)))`$
     
     1. 
     $P(\mathcal{X}<10)\ \approx P_N(\mathcal{X}<9+1/2)\\
