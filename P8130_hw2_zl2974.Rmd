@@ -107,7 +107,7 @@ $$
 3. The probability 34.5% proportion of the patients are prediabetic is:
 $P(\mathcal{X}=50\times34.5\%\approx18)\ = {n \choose 18}p^{18}(1-p)^{n-18}\ = `r pbinom(18,50,.345)- pbinom(17,50,.345)`$
 
-1. the sample size exceed 30, it can be approximate by Normal distribution of $X \sim N(np,np(1-p))$ by CLT
+1. the given $np = 17.25 >10$, and $n(1-p) = `r 50 - 17.25` > 10$, it can be approximate by Normal distribution of $X \sim N(np,np(1-p))$.
 
     1. 
     $P(\mathcal{X}=0)\ \approx P_N(\mathcal{X}<0+1/2)\\
