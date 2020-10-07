@@ -144,7 +144,7 @@ tibble(
   theme(legend.position = "bottom")
 ```
 
-We observed a heavier tail on both side of normal distribution compared with binomial. And thus the probability approximation from normal distribution of the first two results are higher than the actual probabilities from binomial.
+We observed a heavier tail on both side of normal distribution compared with binomial.The normal tail is heavier than the binomial, at least far enough from the mean, where the binomial tail is just 0. And thus the probability approximation from normal distribution of the first two results are higher than the actual probabilities from binomial.
 $\blacksquare$
 
 
@@ -214,8 +214,12 @@ Z\sim Poi(\lambda)
   $$
 \begin{aligned}
 P_X(x=30)= e^{-\lambda'}\lambda'^k/k!=`r dpois(30, .14*8.3*.39+ .428*8.3*6.02+ .243*8.3*.31+ (1-.811)*8.3*5)`\\
-\blacksquare
 \end{aligned}$$
+
+\ Looking at the result, we noticing that, given the high incidence in Non-hispanic white population, its probablitly of having 30 cases is higher than the original probability of nyc and other subpopulations. Comparing the asian and black population, they have similar incidence, but the proportion of black population is some 1.5 times of asian, the probability of 30 cases in black is $10^4$ higher than asian's.
+
+\ Considering the whole updated population, because updating the $\lambda'$ is lower  than the US's incidence and closer to the event we seek, therefore the pobability we have 30 cases is higher in updated nyc than in the non-updated nyc. $\blacksquare$
+
 
 # Problem 4
 People with COVID-19 have had a wide range of symptoms, but high temperature is one of the
