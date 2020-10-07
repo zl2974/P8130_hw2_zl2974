@@ -107,7 +107,7 @@ $$
 3. The probability 34.5% proportion of the patients are prediabetic is:
 $P(\mathcal{X}=50\times34.5\%\approx18)\ = {n \choose 18}p^{18}(1-p)^{n-18}\ = `r pbinom(18,50,.345)- pbinom(17,50,.345)`$
 
-1. the sample size exceed 30, it can be approximate by Normal distribution of $X \sim N(np,\sqrt{np(1-p)})$ by CLT
+1. the sample size exceed 30, it can be approximate by Normal distribution of $X \sim N(np,np(1-p))$ by CLT
 
     1. 
     $P(\mathcal{X}=0)\ \approx P_N(0-1/2 <\mathcal{X}<0+1/2)\\
@@ -236,7 +236,7 @@ temperature). (2.5p)
 
 **Proof**
 
-1. We know the sample mean and its standard deviation of the population. Thus the sample distribution of these 40 patients given the null hypothesis following a $\mathcal{N}(99.9,\frac{0.73}{\sqrt{40}})$ distribution.
+1. We know the sample mean and its standard deviation of the population. Thus the sample distribution of these 40 patients given the null hypothesis following a $\mathcal{N}(99.9,\frac{0.73^2}{40})$ distribution.
 $$
 \begin{aligned}
 P_{\bar{X}}(\bar{x}<98) = \phi(k < \frac{98-99.9}{.73/\sqrt{40}}) \\
