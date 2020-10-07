@@ -105,7 +105,7 @@ $$
 P(\mathcal{X}<10)\ = \sum_{k=0}^9{n \choose k}p^k(1-p)^{n-k}\ = `r pbinom(9,50,.345)`
 $$
 3. The probability 34.5% proportion of the patients are prediabetic is:
-$P(\mathcal{X}=50\times34.5\%\approx17)\ = {n \choose 17}p^{17}(1-p)^{n-17}\ = `r pbinom(17,50,.345)- pbinom(16,50,.345)`$
+$P(\mathcal{X}=50\times34.5\%\approx18)\ = {n \choose 18}p^{18}(1-p)^{n-18}\ = `r pbinom(18,50,.345)- pbinom(17,50,.345)`$
 
 1. the sample size exceed 30, it can be approximate by Normal distribution of $X \sim N(np,\sqrt{np(1-p)})$ by CLT
 
@@ -118,8 +118,8 @@ $P(\mathcal{X}=50\times34.5\%\approx17)\ = {n \choose 17}p^{17}(1-p)^{n-17}\ = `
     = `r pnorm(9.5,17.25,sqrt(50*.345*(1-.345)))`$
     
     1. 
-    $P(\mathcal{X}=17)\ \approx P_N(17-1/2 <\mathcal{X}<17+1/2)\\
-    = `r pnorm(17.5,17.25,sqrt(50*.345*(1-.345)))-pnorm(16.5,17.25,sqrt(50*.345*(1-.345)))`$
+    $P(\mathcal{X}=18)\ \approx P_N(18-1/2 <\mathcal{X}<18+1/2)\\
+    = `r pnorm(18.5,17.25,sqrt(50*.345*(1-.345)))-pnorm(17.5,17.25,sqrt(50*.345*(1-.345)))`$
     
 ```{r approximation,echo=F,message=FALSE}
 library(tidyverse)
@@ -163,7 +163,7 @@ the findings. Demographic data of NYC in 2020: 14.0% Asians, 42.8% non-Hispanic 
 **Proof**
 
 1. There isn't evidence that the total incidence of uveal melanoma in NYC is different from the US.<br/>
-And given this is the number of rare disease in large population, a Poisson distribution can be used to approximate the distribution of population.<br/>
+And given the incidence is rare(one digit per million a small $p$) and calculating the  probability in large population( a large $n$) in period of year 2020, a Poisson distribution can be used to approximate the distribution of population.<br/>
 with the information in the text, $\lambda = 5\times8.3=`r 5*8.3`$, so the number of cases (defined as the R.V. of $\mathcal{X}$ )is follow $\mathcal{X} \sim Poi(`r 5*8.3`)$.
 $$
 \begin{aligned}
@@ -185,38 +185,37 @@ $$\begin{aligned}
 P_{X\ black}( x= 30) = \frac{e^{-`r .243*8.3*.39`}\times`r .243*8.3*.39`^{30}}{30!}=`r dpois(30,.243*8.3*.39)`
 \end{aligned}$$
 
-The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint independent distribution of poisson random variables.
+  The sum of $\lambda'$ is `r .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5` for the updated NYC population by joint independent distribution of poisson random variables.
 The pdf of the Poisson distribution is
 
-$$p(k) = \frac{\lambda ^k}{k!} \exp(-\lambda)$$
+  $$p(k) = \frac{\lambda ^k}{k!} \exp(-\lambda)$$
 
-The joint pdf is the product of the pdfs of all independent variables $z = \sum x_i$. Which is given by
+  The joint pdf is the product of the pdfs of all independent variables $z = \sum x_i$. Which is given by
 
-$$P_Z(z)= \sum P_Z(x_1+x_2) =\sum{P_{X_1}(x_1)\times P_{X_2}(z-x_1)}$$
+  $$P_Z(z)= \sum P_Z(x_1+x_2) =\sum{P_{X_1}(x_1)\times P_{X_2}(z-x_1)}$$
 
-which can be siplified to
+  which can be siplified to
 
-$$\begin{aligned}
+  $$\begin{aligned}
 \sum{P_{X_1}(x_1)\times P_{X_2}(z-x_1)}= \sum{\frac{\lambda_1^{x_1}\exp(-\lambda_1)}{x_1 !} \times \frac{\lambda_2^{z-x_1}\exp(-\lambda_2)}{z-x_1 !}}\\
 =\sum{\frac{z !}{(z-x_1)!x_1!}\times\frac{e^{-(\lambda_1+\lambda_2)}}{z !}\times\lambda_1^{x_1}\times\lambda_2^{z-x_1}}
 \end{aligned}$$
 
-by binomial theorem, this is equal to:
+  by binomial theorem, this is equal to:
 
-$$\begin{aligned}
+  $$\begin{aligned}
 P_Z(z) = \frac{e^{-(\lambda_1+\lambda_2)}(\lambda_1+\lambda_2)^z}{z !}\\
 let\ \lambda = \lambda_1+\lambda_2\\
 Z\sim Poi(\lambda)
 \end{aligned}$$
 
-So, we have 
+  So, we have 
 
-$$
+  $$
 \begin{aligned}
 P_X(x=30)= e^{-\lambda'}\lambda'^k/k!=`r dpois(30, .14*8.3*.31+ .428*8.3*6.02+ .243*8.3*.39+ (1-.811)*8.3*5)`\\
 \blacksquare
-\end{aligned}
-$$
+\end{aligned}$$
 
 # Problem 4
 People with COVID-19 have had a wide range of symptoms, but high temperature is one of the
